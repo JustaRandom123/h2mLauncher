@@ -22,16 +22,27 @@ namespace h2mLauncher
                     string json = await client.DownloadStringTaskAsync(new Uri("https://master.iw4.zip/instance/"));                
                     JArray jsonArray = JArray.Parse(json);              
                     var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
-                                            .Where(server => server["game"]?.ToString().ToUpper() == "H2M"));                
+                                            .Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
+
+                    //string input = "^2[EU] ^6Desire's FFA ^5Trickshot ^3#1";
+                    //ListViewItem item = new ListViewItem(input);
+                    ////  ListViewItem item = new ListViewItem(CreateListViewItem(server["hostname"].ToString()));
+                    //item.Tag = $"0:0";
+                    //item.SubItems.Add("");
+                    //item.SubItems.Add("");
+                    //item.SubItems.Add("");
+                    //item.SubItems.Add("");
+                    //Form1.MainForm.listView1.Items.Add(item);
                     foreach (var server in filteredServers)
                     {
                         ListViewItem item = new ListViewItem(server["hostname"].ToString());
+                        //  ListViewItem item = new ListViewItem(CreateListViewItem(server["hostname"].ToString()));
                         item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
                         item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
                         item.SubItems.Add($"{server["map"].ToString()}");
+                        item.SubItems.Add($"{server["gametype"].ToString()}");
                         item.SubItems.Add("");
-                        item.SubItems.Add("");
-                        Form1.MainForm.listView1.Items.Add(item);                      
+                        Form1.MainForm.listView1.Items.Add(item);
                     }
                 }
                 catch (WebException ex)
@@ -48,9 +59,110 @@ namespace h2mLauncher
 
             Form1.MainForm.listView1.Activation = System.Windows.Forms.ItemActivation.Standard;
             Form1.MainForm.listView1.ItemActivate += ListView1_ItemActivate;
+            Form1.MainForm.listView1.DrawItem += ListView_DrawItem;
+            Form1.MainForm.listView1.DrawSubItem += ListView_DrawSubItem;
+            Form1.MainForm.listView1.DrawColumnHeader += ListView_DrawColumnHeader;
             Form1.MainForm.metroProgressSpinner1.Invoke((MethodInvoker)delegate { Form1.MainForm.metroProgressSpinner1.Visible = false; });  //progess spinner deaktiviert
 
+
+            Form1.MainForm.listView1.Visible = true;
+
             //mf.listView1.Invoke((MethodInvoker)delegate { mf.listView1.Enabled = false; });  
+        }
+
+        //private static string CreateListViewItem(string input)
+        //{
+        //    return input;//new ListViewItem(input);
+        //}
+
+        private static void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        private static void ListView_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            // We don't draw the item here since we use DrawSubItem instead
+        }
+
+        private static void ListView_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            if (e.ColumnIndex == 0) // Custom draw only for the first column (hostname)
+            {
+                // Prüfen, ob der Text Farbcodes enthält
+                if (e.SubItem.Text.Contains('^'))
+                {
+                    // Zeichne den Text mit Farbcodes
+                    DrawColoredText(e.Graphics, e.SubItem.Text, e.Bounds, e.Item.Font);
+                }
+                else
+                {
+                    // Zeichne den Text standardmäßig
+                    e.DrawDefault = true;
+                }
+            }
+            else
+            {
+                e.DrawDefault = true; // Default draw for other columns
+            }
+            //if (e.ColumnIndex == 0) // Only custom draw the first column
+            //{
+            //    DrawColoredText(e.Graphics, e.SubItem.Text, e.Bounds, e.Item.Font);
+            //}
+            //else
+            //{
+            //    e.DrawDefault = true; // Default draw for other columns
+            //}
+
+            //   DrawColoredText(e.Graphics, e.SubItem.Text, e.Bounds, e.Item.Font);
+
+        }
+
+
+        private static void DrawColoredText(Graphics graphics, string text, Rectangle bounds, Font font)
+        {
+            // Mapping of color codes to Brushes
+            Dictionary<char, Brush> colorMap = new Dictionary<char, Brush>
+        {
+            {'0', Brushes.Black},
+            {'1', Brushes.OrangeRed},
+            {'2', Brushes.Lime},
+            {'3', Brushes.Yellow},
+            {'4', Brushes.Navy},
+            {'5', Brushes.LightBlue},
+            {'6', Brushes.Purple},
+            {'7', Brushes.White},
+            {'8', Brushes.Gray},
+            {'9', Brushes.DarkGray}
+        };
+
+            float x = bounds.X;
+
+            for (int i = 0; i < text.Length;)
+            {
+                if (text[i] == '^' && i + 1 < text.Length && colorMap.ContainsKey(text[i + 1]))
+                {
+                    Brush brush = colorMap[text[i + 1]];
+                    i += 2; // Skip the color code
+
+                    // Collect text to draw
+                    string subText = "";
+                    while (i < text.Length && text[i] != '^')
+                    {
+                        subText += text[i];
+                        i++;
+                    }
+
+                    // Measure and draw the text
+                    SizeF size = TextRenderer.MeasureText(subText, font);
+                    graphics.DrawString(subText, font, brush, x, bounds.Y);
+                    x += size.Width;
+                }
+                else
+                {
+                    i++;
+                }
+            }
         }
 
         private async static void ListView1_ItemActivate(object? sender, EventArgs e)
@@ -58,7 +170,7 @@ namespace h2mLauncher
             if (Form1.MainForm.listView1.SelectedItems.Count == 1)
             {
                 var selectedServer = Form1.MainForm.listView1.SelectedItems[0].Tag.ToString();
-                MessageBox.Show(selectedServer);
+                //MessageBox.Show(selectedServer);
                 try
                 {
                     // MessageBox.Show(Filesystems.clientpath + @"\h1_mp64_ship.exe");

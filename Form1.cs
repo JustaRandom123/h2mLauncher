@@ -111,13 +111,15 @@ namespace h2mLauncher
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MainForm.Invoke((MethodInvoker)delegate {            
+         
+            MainForm.Invoke((MethodInvoker)delegate {
+                   MainForm.BackImage = null;
                    MainForm.sizeLeft.Visible = false;
                    MainForm.metroProgressBar1.Visible = false;            
                    MainForm.pictureBox5.Visible = false;
                    MainForm.pictureBox1.Visible = false;
                    MainForm.statusLabel.Visible = false;
-                   MainForm.listView1.Visible = true;
+                   MainForm.listView1.Visible = false;
             });
             Serverbrowser.initializeBrowser();
 

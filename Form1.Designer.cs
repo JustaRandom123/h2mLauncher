@@ -127,7 +127,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = global::h2mLauncher.Properties.Resources.mp;
-            this.pictureBox1.Location = new System.Drawing.Point(845, 112);
+            this.pictureBox1.Location = new System.Drawing.Point(473, 112);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(320, 440);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -150,10 +150,11 @@
             this.listView1.ForeColor = System.Drawing.Color.White;
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(12, 63);
+            this.listView1.Location = new System.Drawing.Point(2, 52);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1217, 622);
+            this.listView1.OwnerDraw = true;
+            this.listView1.Size = new System.Drawing.Size(1238, 646);
             this.listView1.TabIndex = 16;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -176,7 +177,7 @@
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Version";
+            this.columnHeader4.Text = "Gametype";
             this.columnHeader4.Width = 150;
             // 
             // columnHeader5
