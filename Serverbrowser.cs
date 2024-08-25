@@ -13,7 +13,9 @@ namespace h2mLauncher
     internal class Serverbrowser
     {
         public static async void initializeBrowser()
-        {          
+        {
+            int playercount = 0;
+            int servercount = 0;
             Form1.MainForm.metroProgressSpinner1.Invoke((MethodInvoker)delegate { Form1.MainForm.metroProgressSpinner1.Visible = true; Form1.MainForm.metroProgressSpinner1.BringToFront(); });  //progess spinner
             using (WebClient client = new WebClient())
             {            
@@ -23,16 +25,8 @@ namespace h2mLauncher
                     JArray jsonArray = JArray.Parse(json);              
                     var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
                                             .Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
+                    
 
-                    //string input = "^2[EU] ^6Desire's FFA ^5Trickshot ^3#1";
-                    //ListViewItem item = new ListViewItem(input);
-                    ////  ListViewItem item = new ListViewItem(CreateListViewItem(server["hostname"].ToString()));
-                    //item.Tag = $"0:0";
-                    //item.SubItems.Add("");
-                    //item.SubItems.Add("");
-                    //item.SubItems.Add("");
-                    //item.SubItems.Add("");
-                    //Form1.MainForm.listView1.Items.Add(item);
                     foreach (var server in filteredServers)
                     {
                         ListViewItem item = new ListViewItem(server["hostname"].ToString());
@@ -43,6 +37,9 @@ namespace h2mLauncher
                         item.SubItems.Add($"{server["gametype"].ToString()}");
                         item.SubItems.Add("");
                         Form1.MainForm.listView1.Items.Add(item);
+
+                        servercount = servercount + 1;  
+                        playercount = playercount + Convert.ToInt32(server["clientnum"].ToString());
                     }
                 }
                 catch (WebException ex)
@@ -54,9 +51,9 @@ namespace h2mLauncher
                     Console.WriteLine($"Error reading json: {ex.Message}");
                 }
             }
-        
 
 
+            Form1.MainForm.Text = Form1.MainForm.Text + $" | Total Players: {playercount} | Total Servers: {servercount}";
             Form1.MainForm.listView1.Activation = System.Windows.Forms.ItemActivation.Standard;
             Form1.MainForm.listView1.ItemActivate += ListView1_ItemActivate;
             Form1.MainForm.listView1.DrawItem += ListView_DrawItem;
@@ -66,15 +63,10 @@ namespace h2mLauncher
 
 
             Form1.MainForm.listView1.Visible = true;
-
-            //mf.listView1.Invoke((MethodInvoker)delegate { mf.listView1.Enabled = false; });  
+            Form1.MainForm.Refresh();
         }
 
-        //private static string CreateListViewItem(string input)
-        //{
-        //    return input;//new ListViewItem(input);
-        //}
-
+  
         private static void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             e.DrawDefault = true;
