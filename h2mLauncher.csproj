@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <StartupObject>h2mLauncher.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

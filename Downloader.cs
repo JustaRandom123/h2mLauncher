@@ -36,9 +36,9 @@ namespace h2mLauncher
 
 		public static Dictionary<string, string> fileNeedToDownload = new Dictionary<string, string>();
 
-     
 
-        static bool isDownloading = false;
+
+		static bool isDownloading = false;
 
 
 		public static void startDownload(JArray serverjson)
@@ -64,7 +64,7 @@ namespace h2mLauncher
 					string clientByte = "";
 					clientfiles.TryGetValue(serverjson[i][0].ToString(), out clientByte);
 
-					
+
 
 					if (serverjson[i][1].ToString() != clientByte)
 					{
@@ -95,24 +95,24 @@ namespace h2mLauncher
 						return;
 					}
 
-                    //hier
+					//hier
 
-                    Form1.MainForm.Invoke((MethodInvoker)delegate
-                    {
+					Form1.MainForm.Invoke((MethodInvoker)delegate
+					{
 						Form1.MainForm.currentlyDownloading.Visible = true;
 						Form1.MainForm.metroProgressBar1.Visible = true;
-                        Form1.MainForm.sizeLeft.Visible = true;
-                    });
+						Form1.MainForm.sizeLeft.Visible = true;
+					});
 
 
-                    downloadCount = fileNeedToDownload.Count;
+					downloadCount = fileNeedToDownload.Count;
 					downloads = fileNeedToDownload;
 					downloader();
-				
+
 				}
 				else
 				{
-					downloader();			
+					downloader();
 				}
 			}
 			else
@@ -126,7 +126,7 @@ namespace h2mLauncher
 
 		public static void downloader()
 		{
-			isDownloading = true;	
+			isDownloading = true;
 			if (downloadCount > 0)
 			{
 				var file = downloads.First();
@@ -136,14 +136,14 @@ namespace h2mLauncher
 					currentlyDownloading = file.Value;
 					currentlyDownloadingKey = file.Key;
 					Directory.CreateDirectory(Path.GetDirectoryName(file.Key));
-                    Form1.MainForm.Invoke((MethodInvoker)delegate
-                    {
-                        Form1.MainForm.currentlyDownloading.Text = "Downloading: " + gamePath + currentlyDownloading;
-                        Form1.MainForm.statusLabel.Text = "Status | " + Downloader.downloadCount + " file(s) left";
-                    });
-                    //	mf.currentlyDownloading.Text = "Downloading: " + gamePath + currentlyDownloading;
-                    //	mf.statusLabel.Text = "Status | " + Downloader.downloadCount + " file(s) left";
-                    wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+					Form1.MainForm.Invoke((MethodInvoker)delegate
+					{
+						Form1.MainForm.currentlyDownloading.Text = "Downloading: " + gamePath + currentlyDownloading;
+						Form1.MainForm.statusLabel.Text = "Status | " + Downloader.downloadCount + " file(s) left";
+					});
+					//	mf.currentlyDownloading.Text = "Downloading: " + gamePath + currentlyDownloading;
+					//	mf.statusLabel.Text = "Status | " + Downloader.downloadCount + " file(s) left";
+					wc.DownloadProgressChanged += wc_DownloadProgressChanged;
 					wc.DownloadFileCompleted += wc_DownloadFileCompleted;
 					wc.DownloadFileAsync(new Uri(downloadcdn + currentlyDownloading), file.Key);
 
@@ -152,29 +152,19 @@ namespace h2mLauncher
 			else
 			{
 				isDownloading = false;
-                //mf.metroLabel2.Visible = false;
-                //mf.metroLabel3.Visible = false;
-                //mf.metroLabel3.Text = "";
-                //mf.metroLabel2.Text = "";
-                Form1.MainForm.Invoke((MethodInvoker)delegate
-                {
-					//	Form1.MainForm.pictureBox2.Visible = true; //Refresh button
-					//Form1.MainForm.webView21.Visible = false;
+			
+				Form1.MainForm.Invoke((MethodInvoker)delegate
+				{
+				
+				
 					Form1.MainForm.metroProgressBar1.Value = 100;
-                    Form1.MainForm.statusLabel.Text = "Finished!";
-                   // Form1.MainForm.pictureBox5.Visible = true;
-                    Form1.MainForm.pictureBox1.Visible = true;
-                    Form1.MainForm.currentlyDownloading.Visible = false;
-                    Form1.MainForm.sizeLeft.Visible = false;
-                    Form1.MainForm.metroProgressBar1.Visible = false;
-                });
-            //    mf.statusLabel.Text = "Finished! Loading...";
-				//mf.metroProgressBar1.Value = 100;
-				//timer = new System.Timers.Timer(3000);
-				//timer.Elapsed += Timer_Elapsed;
-				//timer.Enabled = true;
-				//timer.Start();
-
+					Form1.MainForm.statusLabel.Text = "Finished!";
+					// Form1.MainForm.pictureBox5.Visible = true;
+					Form1.MainForm.pictureBox1.Visible = true;
+					Form1.MainForm.currentlyDownloading.Visible = false;
+					Form1.MainForm.sizeLeft.Visible = false;
+					Form1.MainForm.metroProgressBar1.Visible = false;
+				});		
 			}
 		}
 
@@ -184,14 +174,12 @@ namespace h2mLauncher
 			mf.statusLabel.Invoke((MethodInvoker)delegate { mf.statusLabel.Visible = false; });
 			mf.Invoke((MethodInvoker)delegate { mf.BackImage = null; });
 			mf.metroProgressBar1.Invoke((MethodInvoker)delegate { mf.metroProgressBar1.Visible = false; });
-		//	mf.listView1.Invoke((MethodInvoker)delegate { mf.listView1.Visible = true; });  //serverbrowser
-		//	mf.pictureBox4.Invoke((MethodInvoker)delegate { mf.pictureBox4.Visible = true; });
 
 			timer.Enabled = false;
 			timer.Dispose();
 			timer = null;
 
-		//	Serverbrowser.LoadServerbrowser();
+			//	Serverbrowser.LoadServerbrowser();
 		}
 
 
@@ -199,8 +187,8 @@ namespace h2mLauncher
 
 		private static void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
-            mf.metroProgressBar1.Invoke((MethodInvoker)delegate { mf.metroProgressBar1.Value = e.ProgressPercentage; });
-          //  mf.metroProgressBar1.Value = e.ProgressPercentage;
+			mf.metroProgressBar1.Invoke((MethodInvoker)delegate { mf.metroProgressBar1.Value = e.ProgressPercentage; });
+			//  mf.metroProgressBar1.Value = e.ProgressPercentage;
 
 			long totalbytes = e.TotalBytesToReceive / 1024 / 1024;
 			long totalbytesKB = e.TotalBytesToReceive / 1024;
@@ -210,20 +198,20 @@ namespace h2mLauncher
 			long bytesKB = e.BytesReceived / 1024;
 			if (e.BytesReceived >= 999)
 			{
-                mf.sizeLeft.Invoke((MethodInvoker)delegate { mf.sizeLeft.Text = bytes.ToString() + " / " + totalbytes.ToString() + " MB "; });
-                //	mf.sizeLeft.Text = bytes.ToString() + " / " + totalbytes.ToString() + " MB ";
-            }
+				mf.sizeLeft.Invoke((MethodInvoker)delegate { mf.sizeLeft.Text = bytes.ToString() + " / " + totalbytes.ToString() + " MB "; });
+				//	mf.sizeLeft.Text = bytes.ToString() + " / " + totalbytes.ToString() + " MB ";
+			}
 			else if (e.BytesReceived < 999)
 			{
-                mf.sizeLeft.Invoke((MethodInvoker)delegate { mf.sizeLeft.Text = bytesKB.ToString() + " / " + totalbytesKB.ToString() + " KB "; });
-                //mf.sizeLeft.Text = bytesKB.ToString() + " / " + totalbytesKB.ToString() + " KB ";
-            }
+				mf.sizeLeft.Invoke((MethodInvoker)delegate { mf.sizeLeft.Text = bytesKB.ToString() + " / " + totalbytesKB.ToString() + " KB "; });
+				//mf.sizeLeft.Text = bytesKB.ToString() + " / " + totalbytesKB.ToString() + " KB ";
+			}
 			else if (e.BytesReceived >= 9999)
 			{
-                mf.sizeLeft.Invoke((MethodInvoker)delegate { mf.sizeLeft.Text = gbbytes.ToString() + " / " + totalbytesGB.ToString() + " GB "; });
-                // mf.sizeLeft.Text = gbbytes.ToString() + " / " + totalbytesGB.ToString() + " GB ";
-            }
-        }
+				mf.sizeLeft.Invoke((MethodInvoker)delegate { mf.sizeLeft.Text = gbbytes.ToString() + " / " + totalbytesGB.ToString() + " GB "; });
+				// mf.sizeLeft.Text = gbbytes.ToString() + " / " + totalbytesGB.ToString() + " GB ";
+			}
+		}
 
 
 		private static void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
@@ -233,6 +221,6 @@ namespace h2mLauncher
 			downloader();
 		}
 
-		
+
 	}
 }

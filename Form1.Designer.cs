@@ -41,11 +41,11 @@
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.refreshButton = new System.Windows.Forms.PictureBox();
+            this.playButton = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playButton)).BeginInit();
             this.SuspendLayout();
             // 
             // statusLabel
@@ -123,6 +123,7 @@
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Visible = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
             // 
             // listView1
             // 
@@ -187,31 +188,33 @@
             this.metroProgressSpinner1.UseSelectable = true;
             this.metroProgressSpinner1.Visible = false;
             // 
-            // pictureBox2
+            // refreshButton
             // 
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Enabled = false;
-            this.pictureBox2.Image = global::h2mLauncher.Properties.Resources.Reset;
-            this.pictureBox2.Location = new System.Drawing.Point(1139, 16);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 18;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
+            this.refreshButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.refreshButton.Enabled = false;
+            this.refreshButton.Image = global::h2mLauncher.Properties.Resources.Reset;
+            this.refreshButton.Location = new System.Drawing.Point(1139, 16);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(30, 30);
+            this.refreshButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.refreshButton.TabIndex = 18;
+            this.refreshButton.TabStop = false;
+            this.refreshButton.Visible = false;
+            this.refreshButton.Click += new System.EventHandler(this.pictureBox2_Click_1);
             // 
-            // pictureBox3
+            // playButton
             // 
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Enabled = false;
-            this.pictureBox3.Image = global::h2mLauncher.Properties.Resources.play;
-            this.pictureBox3.Location = new System.Drawing.Point(1103, 16);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 20;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Visible = false;
+            this.playButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.playButton.Enabled = false;
+            this.playButton.Image = global::h2mLauncher.Properties.Resources.play;
+            this.playButton.Location = new System.Drawing.Point(1103, 16);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(30, 30);
+            this.playButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.playButton.TabIndex = 20;
+            this.playButton.TabStop = false;
+            this.playButton.Visible = false;
+            this.playButton.Click += new System.EventHandler(this.pictureBox3_Click_1);
             // 
             // Form1
             // 
@@ -221,8 +224,8 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BackMaxSize = 1243;
             this.ClientSize = new System.Drawing.Size(1242, 699);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.playButton);
+            this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.pictureBox1);
@@ -239,8 +242,8 @@
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.Load += new System.EventHandler(this.Form1_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,7 +263,7 @@
 		private ColumnHeader columnHeader4;
 		private ColumnHeader columnHeader5;
 		public MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
-		public PictureBox pictureBox2;
-		public PictureBox pictureBox3;
+		public PictureBox refreshButton;
+		public PictureBox playButton;
 	}
 }

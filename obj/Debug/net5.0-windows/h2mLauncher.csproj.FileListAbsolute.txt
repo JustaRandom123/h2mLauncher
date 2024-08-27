@@ -1,0 +1,8 @@
+D:\Github\h2mLauncher\obj\Debug\net5.0-windows\h2mLauncher.csproj.AssemblyReference.cache
+D:\Github\h2mLauncher\obj\Debug\net5.0-windows\h2mLauncher.Form1.resources
+D:\Github\h2mLauncher\obj\Debug\net5.0-windows\h2mLauncher.Properties.Resources.resources
+D:\Github\h2mLauncher\obj\Debug\net5.0-windows\h2mLauncher.csproj.GenerateResource.cache
+D:\Github\h2mLauncher\obj\Debug\net5.0-windows\h2mLauncher.GeneratedMSBuildEditorConfig.editorconfig
+D:\Github\h2mLauncher\obj\Debug\net5.0-windows\h2mLauncher.AssemblyInfoInputs.cache
+D:\Github\h2mLauncher\obj\Debug\net5.0-windows\h2mLauncher.AssemblyInfo.cs
+D:\Github\h2mLauncher\obj\Debug\net5.0-windows\h2mLauncher.csproj.CoreCompileInputs.cache

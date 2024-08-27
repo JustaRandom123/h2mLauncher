@@ -18,51 +18,51 @@ namespace h2mLauncher
             int servercount = 0;
             Form1.MainForm.metroProgressSpinner1.Invoke((MethodInvoker)delegate { Form1.MainForm.metroProgressSpinner1.Visible = true; Form1.MainForm.metroProgressSpinner1.BringToFront(); });  //progess spinner
 
-			using (HttpClient client = new HttpClient())
-			{
-				client.Timeout = TimeSpan.FromSeconds(10); // Timeout auf 10 Sekunden setzen
+            using (HttpClient client = new HttpClient())
+            {
+                client.Timeout = TimeSpan.FromSeconds(10); // Timeout auf 10 Sekunden setzen
 
-				try
-				{
-					string json = await client.GetStringAsync("https://master.iw4.zip/instance/");
-					JArray jsonArray = JArray.Parse(json);
-					var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
-												.Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
+                try
+                {
+                    string json = await client.GetStringAsync("https://master.iw4.zip/instance/");
+                    JArray jsonArray = JArray.Parse(json);
+                    var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
+                                                .Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
 
-					foreach (var server in filteredServers)
-					{
-						ListViewItem item = new ListViewItem(server["hostname"].ToString());
-						item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
-						item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
-						item.SubItems.Add($"{server["map"].ToString()}");
-						item.SubItems.Add($"{server["gametype"].ToString()}");
-						item.SubItems.Add("");
-						Form1.MainForm.listView1.Items.Add(item);
+                    foreach (var server in filteredServers)
+                    {
+                        ListViewItem item = new ListViewItem(server["hostname"].ToString());
+                        item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
+                        item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
+                        item.SubItems.Add($"{server["map"].ToString()}");
+                        item.SubItems.Add($"{server["gametype"].ToString()}");
+                        item.SubItems.Add("");
+                        Form1.MainForm.listView1.Items.Add(item);
 
-						servercount = servercount + 1;
-						playercount = playercount + Convert.ToInt32(server["clientnum"].ToString());
-					}
-				}
-				catch (TaskCanceledException ex)
-				{
-					if (ex.CancellationToken.IsCancellationRequested)
-					{
-						Console.WriteLine("Operation cancelled.");
-					}
-					else
-					{
-                        MessageBox.Show("Timeout occured during fetching the serverlist! Use the refresh button to try it again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);			
-					}
-				}
-				catch (HttpRequestException ex)
-				{
-					Console.WriteLine($"Error fetching json: {ex.Message}");
-				}
-				catch (JsonException ex)
-				{
-					Console.WriteLine($"Error reading json: {ex.Message}");
-				}
-			}
+                        servercount = servercount + 1;
+                        playercount = playercount + Convert.ToInt32(server["clientnum"].ToString());
+                    }
+                }
+                catch (TaskCanceledException ex)
+                {
+                    if (ex.CancellationToken.IsCancellationRequested)
+                    {
+                        Console.WriteLine("Operation cancelled.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Timeout occured during fetching the serverlist! Use the refresh button to try it again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    Console.WriteLine($"Error fetching json: {ex.Message}");
+                }
+                catch (JsonException ex)
+                {
+                    Console.WriteLine($"Error reading json: {ex.Message}");
+                }
+            }
 
 
 
@@ -102,10 +102,10 @@ namespace h2mLauncher
             //    }
             //}
 
-            Form1.MainForm.pictureBox2.Enabled = true; //Refresh button
-			Form1.MainForm.pictureBox3.Enabled = true; //play button
+            Form1.MainForm.refreshButton.Enabled = true; //Refresh button
+            Form1.MainForm.playButton.Enabled = true; //play button
 
-			Form1.MainForm.Text = $"Welcome {SteamHandler.username} | Total Players: {playercount} | Total Servers: {servercount}";
+            Form1.MainForm.Text = $"Welcome {SteamHandler.username} | Total Players: {playercount} | Total Servers: {servercount}";
             Form1.MainForm.listView1.Activation = System.Windows.Forms.ItemActivation.Standard;
             Form1.MainForm.listView1.ItemActivate += ListView1_ItemActivate;
             Form1.MainForm.listView1.DrawItem += ListView_DrawItem;
@@ -118,7 +118,7 @@ namespace h2mLauncher
             Form1.MainForm.Refresh();
         }
 
-  
+
         private static void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             e.DrawDefault = true;
@@ -149,17 +149,6 @@ namespace h2mLauncher
             {
                 e.DrawDefault = true; // Default draw for other columns
             }
-            //if (e.ColumnIndex == 0) // Only custom draw the first column
-            //{
-            //    DrawColoredText(e.Graphics, e.SubItem.Text, e.Bounds, e.Item.Font);
-            //}
-            //else
-            //{
-            //    e.DrawDefault = true; // Default draw for other columns
-            //}
-
-            //   DrawColoredText(e.Graphics, e.SubItem.Text, e.Bounds, e.Item.Font);
-
         }
 
 
@@ -216,20 +205,6 @@ namespace h2mLauncher
                 var selectedServer = Form1.MainForm.listView1.SelectedItems[0].Tag.ToString();
                 Clipboard.SetText($"connect {selectedServer}");
                 MessageBox.Show($"connect {selectedServer}\n\nLaunch the game open the console in main menu and paste the copied text to join the server!", "Server Copied to clipboard!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //MessageBox.Show(selectedServer);
-                //try
-                //{
-                //    // MessageBox.Show(Filesystems.clientpath + @"\h1_mp64_ship.exe");
-                //    var process = new System.Diagnostics.Process();
-                //    process.StartInfo.WorkingDirectory = Filesystems.clientpath;
-                //    process.StartInfo.FileName = Filesystems.clientpath + $@"\h2m-mod.exe";
-                //   // process.StartInfo.Arguments = $"+connect {selectedServer}";
-                //    process.Start();
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
                 return;
             }
             else

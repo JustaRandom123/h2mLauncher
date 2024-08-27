@@ -17,9 +17,9 @@ namespace h2mLauncher
 		public static string gamepath;
 		public static uint gameID = 393100; //393080;  //
 		public static string username;
-        public static void InitializeSteam()
+		public static void InitializeSteam()
 		{
-		
+
 			//Form1.MainForm.Invoke((MethodInvoker)delegate
 			//{
 			//	//	Form1.MainForm.pictureBox2.Visible = true; //Refresh button
@@ -82,8 +82,8 @@ namespace h2mLauncher
 			}
 		}
 
-	
 
-	
+
+
 	}
 }

@@ -21,18 +21,18 @@ namespace h2mLauncher
 		public static Dictionary<string, string> getClientFiles()
 		{
 			Dictionary<string, string> files = new Dictionary<string, string>();
-			
 
 
-			string[] filesFromPath1 = Directory.GetFiles(clientpath , "*.*", SearchOption.AllDirectories);
-			
-            Form1.MainForm.Invoke((MethodInvoker)delegate
-            {
-                Form1.MainForm.statusLabel.Text = "Loading client files";
-            });
-            foreach (string file in filesFromPath1)
+
+			string[] filesFromPath1 = Directory.GetFiles(clientpath, "*.*", SearchOption.AllDirectories);
+
+			Form1.MainForm.Invoke((MethodInvoker)delegate
 			{
-			
+				Form1.MainForm.statusLabel.Text = "Loading client files";
+			});
+			foreach (string file in filesFromPath1)
+			{
+
 				FileInfo info = new FileInfo(file);
 				string hash = hashChecker(file);
 
@@ -40,16 +40,16 @@ namespace h2mLauncher
 				if (!files.ContainsKey(info.Name))
 				{
 					string path = info.Directory.FullName;
-					string newpath = path.Replace(clientpath, "") + "\\" + info.Name;				
+					string newpath = path.Replace(clientpath, "") + "\\" + info.Name;
 					files.Add(newpath, hash);
 				}
 			}
-            Form1.MainForm.Invoke((MethodInvoker)delegate
-            {
-                Form1.MainForm.statusLabel.Text = "Finished loading!";
-            });
-            //Downloader.mf.statusLabel.Text = "Finished loading!";
-            clientFiles = files;
+			Form1.MainForm.Invoke((MethodInvoker)delegate
+			{
+				Form1.MainForm.statusLabel.Text = "Finished loading!";
+			});
+			//Downloader.mf.statusLabel.Text = "Finished loading!";
+			clientFiles = files;
 			return files;
 		}
 	}
