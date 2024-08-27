@@ -17,43 +17,94 @@ namespace h2mLauncher
             int playercount = 0;
             int servercount = 0;
             Form1.MainForm.metroProgressSpinner1.Invoke((MethodInvoker)delegate { Form1.MainForm.metroProgressSpinner1.Visible = true; Form1.MainForm.metroProgressSpinner1.BringToFront(); });  //progess spinner
-            using (WebClient client = new WebClient())
-            {            
-                try
-                {           
-                    string json = await client.DownloadStringTaskAsync(new Uri("https://master.iw4.zip/instance/"));                
-                    JArray jsonArray = JArray.Parse(json);              
-                    var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
-                                            .Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
-                    
 
-                    foreach (var server in filteredServers)
-                    {
-                        ListViewItem item = new ListViewItem(server["hostname"].ToString());
-                        //  ListViewItem item = new ListViewItem(CreateListViewItem(server["hostname"].ToString()));
-                        item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
-                        item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
-                        item.SubItems.Add($"{server["map"].ToString()}");
-                        item.SubItems.Add($"{server["gametype"].ToString()}");
-                        item.SubItems.Add("");
-                        Form1.MainForm.listView1.Items.Add(item);
+			using (HttpClient client = new HttpClient())
+			{
+				client.Timeout = TimeSpan.FromSeconds(10); // Timeout auf 10 Sekunden setzen
 
-                        servercount = servercount + 1;  
-                        playercount = playercount + Convert.ToInt32(server["clientnum"].ToString());
-                    }
-                }
-                catch (WebException ex)
-                {
-                    Console.WriteLine($"Error fetching json: {ex.Message}");
-                }
-                catch (JsonException ex)
-                {
-                    Console.WriteLine($"Error reading json: {ex.Message}");
-                }
-            }
+				try
+				{
+					string json = await client.GetStringAsync("https://master.iw4.zip/instance/");
+					JArray jsonArray = JArray.Parse(json);
+					var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
+												.Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
+
+					foreach (var server in filteredServers)
+					{
+						ListViewItem item = new ListViewItem(server["hostname"].ToString());
+						item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
+						item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
+						item.SubItems.Add($"{server["map"].ToString()}");
+						item.SubItems.Add($"{server["gametype"].ToString()}");
+						item.SubItems.Add("");
+						Form1.MainForm.listView1.Items.Add(item);
+
+						servercount = servercount + 1;
+						playercount = playercount + Convert.ToInt32(server["clientnum"].ToString());
+					}
+				}
+				catch (TaskCanceledException ex)
+				{
+					if (ex.CancellationToken.IsCancellationRequested)
+					{
+						Console.WriteLine("Operation cancelled.");
+					}
+					else
+					{
+                        MessageBox.Show("Timeout occured during fetching the serverlist! Use the refresh button to try it again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);			
+					}
+				}
+				catch (HttpRequestException ex)
+				{
+					Console.WriteLine($"Error fetching json: {ex.Message}");
+				}
+				catch (JsonException ex)
+				{
+					Console.WriteLine($"Error reading json: {ex.Message}");
+				}
+			}
 
 
-            Form1.MainForm.Text = Form1.MainForm.Text + $" | Total Players: {playercount} | Total Servers: {servercount}";
+
+            //using (WebClient client = new WebClient())
+            //{   
+
+            //    try
+            //    {           
+            //        string json = await client.DownloadStringTaskAsync(new Uri("https://master.iw4.zip/instance/"));                
+            //        JArray jsonArray = JArray.Parse(json);              
+            //        var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
+            //                                .Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
+
+
+            //        foreach (var server in filteredServers)
+            //        {
+            //            ListViewItem item = new ListViewItem(server["hostname"].ToString());
+            //            //  ListViewItem item = new ListViewItem(CreateListViewItem(server["hostname"].ToString()));
+            //            item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
+            //            item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
+            //            item.SubItems.Add($"{server["map"].ToString()}");
+            //            item.SubItems.Add($"{server["gametype"].ToString()}");
+            //            item.SubItems.Add("");
+            //            Form1.MainForm.listView1.Items.Add(item);
+
+            //            servercount = servercount + 1;  
+            //            playercount = playercount + Convert.ToInt32(server["clientnum"].ToString());
+            //        }
+            //    }
+            //    catch (WebException ex)
+            //    {
+            //        Console.WriteLine($"Error fetching json: {ex.Message}");
+            //    }
+            //    catch (JsonException ex)
+            //    {
+            //        Console.WriteLine($"Error reading json: {ex.Message}");
+            //    }
+            //}
+
+            Form1.MainForm.pictureBox2.Enabled = true; //Refresh button
+
+			Form1.MainForm.Text = $"Welcome {SteamHandler.username} | Total Players: {playercount} | Total Servers: {servercount}";
             Form1.MainForm.listView1.Activation = System.Windows.Forms.ItemActivation.Standard;
             Form1.MainForm.listView1.ItemActivate += ListView1_ItemActivate;
             Form1.MainForm.listView1.DrawItem += ListView_DrawItem;
@@ -163,7 +214,7 @@ namespace h2mLauncher
             {
                 var selectedServer = Form1.MainForm.listView1.SelectedItems[0].Tag.ToString();
                 Clipboard.SetText(selectedServer);
-                MessageBox.Show($"connect {selectedServer}", "Server Copied to clipboard!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"connect {selectedServer}\n\nLaunch the game open the console in main menu and paste the copied text to join the server!", "Server Copied to clipboard!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //MessageBox.Show(selectedServer);
                 //try
                 //{
