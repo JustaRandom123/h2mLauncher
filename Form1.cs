@@ -1,6 +1,9 @@
+using h2mLauncher.Properties;
 using MetroFramework.Drawing.Html;
 using MetroFramework.Forms;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using System.Net;
 using System.Runtime.CompilerServices;
 
 namespace h2mLauncher
@@ -59,15 +62,25 @@ namespace h2mLauncher
 			pictureBox1.Refresh();
 		}
 
-		//private void PictureBox5_MouseEnter(object? sender, EventArgs e)
-		//{
-		//	pictureBox5.Size = new Size(pictureBox5.Width + 8, pictureBox5.Height + 8);
-		//	pictureBox5.Refresh();
-		//}
 
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			using (WebClient wc = new WebClient())
+			{
+				string sv = wc.DownloadString("http://134.255.232.105:80/updater/version.json");
+                JObject json = JObject.Parse(sv);
+                if (Settings.Default.version != json["version"].ToString())
+				{				
+					MessageBox.Show($"New H2M Launcher update v{json["version"].ToString()} required", "Update", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+					string exeDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);                  
+                    Application.Exit();
+					Process.Start(exeDirectory + @"\UpdaterSystem.exe");
+					return;
+				}
+			}
+
+
 			this.Controls.Add(CreateIntro.InitializeIntro());
 			MainForm = this;
 			Downloader.mf = this;
@@ -116,7 +129,7 @@ namespace h2mLauncher
 
 			MainForm.Invoke((MethodInvoker)delegate
 			{
-				MainForm.webView21.Visible = false;
+			//	MainForm.webView21.Visible = false;
 				MainForm.pictureBox3.Visible = true; //Refresh button
 				MainForm.pictureBox2.Visible = true; //Refresh button
 				MainForm.BackImage = null;
@@ -173,7 +186,8 @@ namespace h2mLauncher
 			try
 			{
 				var process = new System.Diagnostics.Process();
-				process.StartInfo.FileName = Filesystems.clientpath + @"\h1_mp64_ship.exe";
+				process.StartInfo.WorkingDirectory = Filesystems.clientpath;
+				process.StartInfo.FileName = Filesystems.clientpath + @"\h2m-mod.exe";
 				process.Start();
 			}
 			catch (Exception ex)
@@ -186,5 +200,10 @@ namespace h2mLauncher
 		{
 
 		}
-	}
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

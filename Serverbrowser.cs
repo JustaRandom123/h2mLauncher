@@ -214,7 +214,7 @@ namespace h2mLauncher
             if (Form1.MainForm.listView1.SelectedItems.Count == 1)
             {
                 var selectedServer = Form1.MainForm.listView1.SelectedItems[0].Tag.ToString();
-                Clipboard.SetText(selectedServer);
+                Clipboard.SetText($"connect {selectedServer}");
                 MessageBox.Show($"connect {selectedServer}\n\nLaunch the game open the console in main menu and paste the copied text to join the server!", "Server Copied to clipboard!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //MessageBox.Show(selectedServer);
                 //try
