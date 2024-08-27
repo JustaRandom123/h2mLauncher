@@ -162,20 +162,22 @@ namespace h2mLauncher
             if (Form1.MainForm.listView1.SelectedItems.Count == 1)
             {
                 var selectedServer = Form1.MainForm.listView1.SelectedItems[0].Tag.ToString();
+                Clipboard.SetText(selectedServer);
+                MessageBox.Show($"connect {selectedServer}", "Server Copied to clipboard!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //MessageBox.Show(selectedServer);
-                try
-                {
-                    // MessageBox.Show(Filesystems.clientpath + @"\h1_mp64_ship.exe");
-                    var process = new System.Diagnostics.Process();
-                    process.StartInfo.WorkingDirectory = Filesystems.clientpath;
-                    process.StartInfo.FileName = Filesystems.clientpath + $@"\h2m-mod.exe";
-                   // process.StartInfo.Arguments = $"+connect {selectedServer}";
-                    process.Start();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                //try
+                //{
+                //    // MessageBox.Show(Filesystems.clientpath + @"\h1_mp64_ship.exe");
+                //    var process = new System.Diagnostics.Process();
+                //    process.StartInfo.WorkingDirectory = Filesystems.clientpath;
+                //    process.StartInfo.FileName = Filesystems.clientpath + $@"\h2m-mod.exe";
+                //   // process.StartInfo.Arguments = $"+connect {selectedServer}";
+                //    process.Start();
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
                 return;
             }
             else
