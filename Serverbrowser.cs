@@ -103,6 +103,7 @@ namespace h2mLauncher
             //}
 
             Form1.MainForm.pictureBox2.Enabled = true; //Refresh button
+			Form1.MainForm.pictureBox3.Enabled = true; //play button
 
 			Form1.MainForm.Text = $"Welcome {SteamHandler.username} | Total Players: {playercount} | Total Servers: {servercount}";
             Form1.MainForm.listView1.Activation = System.Windows.Forms.ItemActivation.Standard;

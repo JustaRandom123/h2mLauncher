@@ -32,7 +32,6 @@
 			metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
 			currentlyDownloading = new MetroFramework.Controls.MetroLabel();
 			sizeLeft = new MetroFramework.Controls.MetroLabel();
-			pictureBox5 = new PictureBox();
 			pictureBox1 = new PictureBox();
 			listView1 = new ListView();
 			columnHeader1 = new ColumnHeader();
@@ -42,9 +41,12 @@
 			columnHeader5 = new ColumnHeader();
 			metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			pictureBox2 = new PictureBox();
-			((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+			pictureBox3 = new PictureBox();
+			webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+			((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+			((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
 			SuspendLayout();
 			// 
 			// statusLabel
@@ -110,20 +112,6 @@
 			sizeLeft.UseCustomForeColor = true;
 			sizeLeft.Visible = false;
 			// 
-			// pictureBox5
-			// 
-			pictureBox5.BackColor = Color.Transparent;
-			pictureBox5.Cursor = Cursors.Hand;
-			pictureBox5.Image = Properties.Resources.sp1;
-			pictureBox5.Location = new Point(109, 112);
-			pictureBox5.Name = "pictureBox5";
-			pictureBox5.Size = new Size(320, 440);
-			pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-			pictureBox5.TabIndex = 14;
-			pictureBox5.TabStop = false;
-			pictureBox5.Visible = false;
-			pictureBox5.Click += pictureBox5_Click;
-			// 
 			// pictureBox1
 			// 
 			pictureBox1.BackColor = Color.Transparent;
@@ -156,6 +144,7 @@
 			listView1.UseCompatibleStateImageBehavior = false;
 			listView1.View = View.Details;
 			listView1.Visible = false;
+			listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
 			// 
 			// columnHeader1
 			// 
@@ -210,6 +199,33 @@
 			pictureBox2.Visible = false;
 			pictureBox2.Click += pictureBox2_Click;
 			// 
+			// pictureBox3
+			// 
+			pictureBox3.Cursor = Cursors.Hand;
+			pictureBox3.Enabled = false;
+			pictureBox3.Image = Properties.Resources.play;
+			pictureBox3.Location = new Point(1103, 16);
+			pictureBox3.Name = "pictureBox3";
+			pictureBox3.Size = new Size(30, 30);
+			pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+			pictureBox3.TabIndex = 20;
+			pictureBox3.TabStop = false;
+			pictureBox3.Visible = false;
+			pictureBox3.Click += pictureBox3_Click;
+			// 
+			// webView21
+			// 
+			webView21.AllowExternalDrop = true;
+			webView21.CreationProperties = null;
+			webView21.DefaultBackgroundColor = Color.White;
+			webView21.Location = new Point(867, 112);
+			webView21.Name = "webView21";
+			webView21.Size = new Size(320, 440);
+			webView21.Source = new Uri("http://134.255.232.105/ad.html", UriKind.Absolute);
+			webView21.TabIndex = 21;
+			webView21.Visible = false;
+			webView21.ZoomFactor = 1D;
+			// 
 			// Form1
 			// 
 			ApplyImageInvert = true;
@@ -218,15 +234,16 @@
 			BackgroundImageLayout = ImageLayout.Stretch;
 			BackMaxSize = 1243;
 			ClientSize = new Size(1242, 699);
+			Controls.Add(pictureBox3);
 			Controls.Add(pictureBox2);
 			Controls.Add(metroProgressSpinner1);
 			Controls.Add(listView1);
 			Controls.Add(pictureBox1);
-			Controls.Add(pictureBox5);
 			Controls.Add(sizeLeft);
 			Controls.Add(currentlyDownloading);
 			Controls.Add(metroProgressBar1);
 			Controls.Add(statusLabel);
+			Controls.Add(webView21);
 			MaximizeBox = false;
 			Name = "Form1";
 			Resizable = false;
@@ -234,9 +251,10 @@
 			Text = "H2M Launcher";
 			Theme = MetroFramework.MetroThemeStyle.Dark;
 			Load += Form1_Load;
-			((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+			((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+			((System.ComponentModel.ISupportInitialize)webView21).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -247,7 +265,6 @@
 		public MetroFramework.Controls.MetroProgressBar metroProgressBar1;
 		public MetroFramework.Controls.MetroLabel currentlyDownloading;
 		public MetroFramework.Controls.MetroLabel sizeLeft;
-		public PictureBox pictureBox5;
 		public PictureBox pictureBox1;
 		public ListView listView1;
 		private ColumnHeader columnHeader1;
@@ -257,5 +274,7 @@
 		private ColumnHeader columnHeader5;
 		public MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
 		public PictureBox pictureBox2;
+		public PictureBox pictureBox3;
+		public Microsoft.Web.WebView2.WinForms.WebView2 webView21;
 	}
 }

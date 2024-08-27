@@ -30,6 +30,25 @@
           }
         }
       },
+      "Microsoft.Web.WebView2/1.0.2739.15": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/WebView2Loader.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "1.0.2739.15"
+          },
+          "runtimes/win-x64/native/WebView2Loader.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.0.2739.15"
+          },
+          "runtimes/win-x86/native/WebView2Loader.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.0.2739.15"
+          }
+        }
+      },
       "Newtonsoft.Json/13.0.3": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -54,6 +73,13 @@
       "sha512": "sha512-p2F3w8bF1tb0tpkDceEVO65UYMKnJxdQyNxVyl/OjrFZHighicLYZDppKkiqmvBZ10XUi2mqHiIJUzXBP3GElQ==",
       "path": "metromodernui/1.4.0",
       "hashPath": "metromodernui.1.4.0.nupkg.sha512"
+    },
+    "Microsoft.Web.WebView2/1.0.2739.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hZg7vHWBg4RIiK3rhkNqX3hcBqqoVXVrrO2BVrVOiSmEgfLa7lY64G1tWh2VY84MfHIFLCAQNwn3Rwvu+ICHyw==",
+      "path": "microsoft.web.webview2/1.0.2739.15",
+      "hashPath": "microsoft.web.webview2.1.0.2739.15.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",

@@ -14,8 +14,8 @@ namespace h2mLauncher
 			this.pictureBox1.MouseEnter += PictureBox1_MouseEnter;
 			this.pictureBox1.MouseLeave += PictureBox1_MouseLeave;
 
-			this.pictureBox5.MouseEnter += PictureBox5_MouseEnter;
-			this.pictureBox5.MouseLeave += PictureBox5_MouseLeave;
+			//	this.pictureBox5.MouseEnter += PictureBox5_MouseEnter;
+			//	this.pictureBox5.MouseLeave += PictureBox5_MouseLeave;
 
 			this.ApplyImageInvert = false;
 			this.BackImage = h2mLauncher.Properties.Resources.backHD;
@@ -47,11 +47,11 @@ namespace h2mLauncher
 		}
 
 
-		private void PictureBox5_MouseLeave(object? sender, EventArgs e)
-		{
-			pictureBox5.Size = new Size(pictureBox5.Width - 8, pictureBox5.Height - 8);
-			pictureBox5.Refresh();
-		}
+		//private void PictureBox5_MouseLeave(object? sender, EventArgs e)
+		//{
+		//	pictureBox5.Size = new Size(pictureBox5.Width - 8, pictureBox5.Height - 8);
+		//	pictureBox5.Refresh();
+		//}
 
 		private void PictureBox1_MouseEnter(object? sender, EventArgs e)
 		{
@@ -59,11 +59,11 @@ namespace h2mLauncher
 			pictureBox1.Refresh();
 		}
 
-		private void PictureBox5_MouseEnter(object? sender, EventArgs e)
-		{
-			pictureBox5.Size = new Size(pictureBox5.Width + 8, pictureBox5.Height + 8);
-			pictureBox5.Refresh();
-		}
+		//private void PictureBox5_MouseEnter(object? sender, EventArgs e)
+		//{
+		//	pictureBox5.Size = new Size(pictureBox5.Width + 8, pictureBox5.Height + 8);
+		//	pictureBox5.Refresh();
+		//}
 
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -116,11 +116,13 @@ namespace h2mLauncher
 
 			MainForm.Invoke((MethodInvoker)delegate
 			{
+				MainForm.webView21.Visible = false;
+				MainForm.pictureBox3.Visible = true; //Refresh button
 				MainForm.pictureBox2.Visible = true; //Refresh button
 				MainForm.BackImage = null;
 				MainForm.sizeLeft.Visible = false;
 				MainForm.metroProgressBar1.Visible = false;
-				MainForm.pictureBox5.Visible = false;
+				//	MainForm.pictureBox5.Visible = false;
 				MainForm.pictureBox1.Visible = false;
 				MainForm.statusLabel.Visible = false;
 				MainForm.listView1.Visible = false;
@@ -164,6 +166,25 @@ namespace h2mLauncher
 			pictureBox2.Enabled = false; //Refresh button
 			listView1.Items.Clear();
 			Serverbrowser.initializeBrowser();
+		}
+
+		private void pictureBox3_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				var process = new System.Diagnostics.Process();
+				process.StartInfo.FileName = Filesystems.clientpath + @"\h1_mp64_ship.exe";
+				process.Start();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
