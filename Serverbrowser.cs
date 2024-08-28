@@ -66,48 +66,14 @@ namespace h2mLauncher
 
 
 
-            //using (WebClient client = new WebClient())
-            //{   
-
-            //    try
-            //    {           
-            //        string json = await client.DownloadStringTaskAsync(new Uri("https://master.iw4.zip/instance/"));                
-            //        JArray jsonArray = JArray.Parse(json);              
-            //        var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
-            //                                .Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
-
-
-            //        foreach (var server in filteredServers)
-            //        {
-            //            ListViewItem item = new ListViewItem(server["hostname"].ToString());
-            //            //  ListViewItem item = new ListViewItem(CreateListViewItem(server["hostname"].ToString()));
-            //            item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
-            //            item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
-            //            item.SubItems.Add($"{server["map"].ToString()}");
-            //            item.SubItems.Add($"{server["gametype"].ToString()}");
-            //            item.SubItems.Add("");
-            //            Form1.MainForm.listView1.Items.Add(item);
-
-            //            servercount = servercount + 1;  
-            //            playercount = playercount + Convert.ToInt32(server["clientnum"].ToString());
-            //        }
-            //    }
-            //    catch (WebException ex)
-            //    {
-            //        Console.WriteLine($"Error fetching json: {ex.Message}");
-            //    }
-            //    catch (JsonException ex)
-            //    {
-            //        Console.WriteLine($"Error reading json: {ex.Message}");
-            //    }
-            //}
-
+     
             Form1.MainForm.refreshButton.Enabled = true; //Refresh button
             Form1.MainForm.playButton.Enabled = true; //play button
 
             Form1.MainForm.Text = $"Welcome {SteamHandler.username} | Total Players: {playercount} | Total Servers: {servercount}";
-            Form1.MainForm.listView1.Activation = System.Windows.Forms.ItemActivation.Standard;
+          //  Form1.MainForm.listView1.Activation = System.Windows.Forms.ItemActivation.Standard;
             Form1.MainForm.listView1.ItemActivate += ListView1_ItemActivate;
+           // Form1.MainForm.listView1.ItemCheck += ListView1_ItemCheck;
             Form1.MainForm.listView1.DrawItem += ListView_DrawItem;
             Form1.MainForm.listView1.DrawSubItem += ListView_DrawSubItem;
             Form1.MainForm.listView1.DrawColumnHeader += ListView_DrawColumnHeader;
@@ -117,7 +83,6 @@ namespace h2mLauncher
             Form1.MainForm.listView1.Visible = true;
             Form1.MainForm.Refresh();
         }
-
 
         private static void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
@@ -198,14 +163,14 @@ namespace h2mLauncher
             }
         }
 
-        private async static void ListView1_ItemActivate(object? sender, EventArgs e)
+        public async static void ListView1_ItemActivate(object? sender, EventArgs e)
         {
             if (Form1.MainForm.listView1.SelectedItems.Count == 1)
             {
                 var selectedServer = Form1.MainForm.listView1.SelectedItems[0].Tag.ToString();
                 Clipboard.SetText($"connect {selectedServer}");
                 MessageBox.Show($"connect {selectedServer}\n\nLaunch the game open the console in main menu and paste the copied text to join the server!", "Server Copied to clipboard!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+              //  return;
             }
             else
             {

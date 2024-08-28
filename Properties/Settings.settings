@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="h2mLauncher.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.0.0.1</Value>
+    <Setting Name="version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.0.0.3</Value>
     </Setting>
   </Settings>
 </SettingsFile>

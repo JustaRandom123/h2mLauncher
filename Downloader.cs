@@ -160,7 +160,7 @@ namespace h2mLauncher
 					Form1.MainForm.metroProgressBar1.Value = 100;
 					Form1.MainForm.statusLabel.Text = "Finished!";
 					// Form1.MainForm.pictureBox5.Visible = true;
-					Form1.MainForm.pictureBox1.Visible = true;
+					Form1.MainForm.multiplayer.Visible = true;
 					Form1.MainForm.currentlyDownloading.Visible = false;
 					Form1.MainForm.sizeLeft.Visible = false;
 					Form1.MainForm.metroProgressBar1.Visible = false;

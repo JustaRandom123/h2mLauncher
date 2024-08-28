@@ -33,7 +33,7 @@
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             this.currentlyDownloading = new MetroFramework.Controls.MetroLabel();
             this.sizeLeft = new MetroFramework.Controls.MetroLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.multiplayer = new System.Windows.Forms.PictureBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -43,7 +43,7 @@
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.refreshButton = new System.Windows.Forms.PictureBox();
             this.playButton = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.multiplayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playButton)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +55,7 @@
             this.statusLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.statusLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.statusLabel.ForeColor = System.Drawing.Color.White;
-            this.statusLabel.Location = new System.Drawing.Point(559, 527);
+            this.statusLabel.Location = new System.Drawing.Point(559, 543);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(108, 25);
             this.statusLabel.TabIndex = 0;
@@ -111,22 +111,23 @@
             this.sizeLeft.UseCustomForeColor = true;
             this.sizeLeft.Visible = false;
             // 
-            // pictureBox1
+            // multiplayer
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::h2mLauncher.Properties.Resources.mp;
-            this.pictureBox1.Location = new System.Drawing.Point(473, 112);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(320, 440);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
+            this.multiplayer.BackColor = System.Drawing.Color.Transparent;
+            this.multiplayer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.multiplayer.Image = global::h2mLauncher.Properties.Resources.mp1;
+            this.multiplayer.Location = new System.Drawing.Point(295, 124);
+            this.multiplayer.Name = "multiplayer";
+            this.multiplayer.Size = new System.Drawing.Size(650, 418);
+            this.multiplayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.multiplayer.TabIndex = 15;
+            this.multiplayer.TabStop = false;
+            this.multiplayer.Visible = false;
+            this.multiplayer.Click += new System.EventHandler(this.pictureBox1_Click_1);
             // 
             // listView1
             // 
+            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -224,11 +225,11 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BackMaxSize = 1243;
             this.ClientSize = new System.Drawing.Size(1242, 699);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.multiplayer);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.metroProgressSpinner1);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.sizeLeft);
             this.Controls.Add(this.currentlyDownloading);
             this.Controls.Add(this.metroProgressBar1);
@@ -241,7 +242,7 @@
             this.Text = "H2M Launcher";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.Load += new System.EventHandler(this.Form1_Load_1);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.multiplayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playButton)).EndInit();
             this.ResumeLayout(false);
@@ -255,7 +256,7 @@
 		public MetroFramework.Controls.MetroProgressBar metroProgressBar1;
 		public MetroFramework.Controls.MetroLabel currentlyDownloading;
 		public MetroFramework.Controls.MetroLabel sizeLeft;
-		public PictureBox pictureBox1;
+		public PictureBox multiplayer;
 		public ListView listView1;
 		private ColumnHeader columnHeader1;
 		private ColumnHeader columnHeader2;

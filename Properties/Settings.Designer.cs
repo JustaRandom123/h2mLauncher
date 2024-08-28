@@ -23,15 +23,12 @@ namespace h2mLauncher.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.0.0.3")]
         public string version {
             get {
                 return ((string)(this["version"]));
-            }
-            set {
-                this["version"] = value;
             }
         }
     }

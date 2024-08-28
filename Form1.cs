@@ -15,8 +15,8 @@ namespace h2mLauncher
         public Form1()
 		{
 			InitializeComponent();
-            this.pictureBox1.MouseEnter += PictureBox1_MouseEnter;
-            this.pictureBox1.MouseLeave += PictureBox1_MouseLeave;
+            this.multiplayer.MouseEnter += PictureBox1_MouseEnter;
+            this.multiplayer.MouseLeave += PictureBox1_MouseLeave;
 
  
 
@@ -34,7 +34,7 @@ namespace h2mLauncher
         {
             using (WebClient wc = new WebClient())
             {
-                string sv = wc.DownloadString("http://134.255.232.105:80/updater/version.json");
+                string sv = wc.DownloadString("http://www.gaming-coding.de:9660/updater/version.json");
                 JObject json = JObject.Parse(sv);
                 if (Settings.Default.version != json["version"].ToString())
                 {
@@ -67,15 +67,15 @@ namespace h2mLauncher
 
         private void PictureBox1_MouseLeave(object? sender, EventArgs e)
         {
-            pictureBox1.Size = new Size(pictureBox1.Width - 8, pictureBox1.Height - 8);
-            pictureBox1.Refresh();
+            multiplayer.Size = new Size(multiplayer.Width - 8, multiplayer.Height - 8);
+            multiplayer.Refresh();
         }
 
 
         private void PictureBox1_MouseEnter(object? sender, EventArgs e)
         {
-            pictureBox1.Size = new Size(pictureBox1.Width + 8, pictureBox1.Height + 8);
-            pictureBox1.Refresh();
+            multiplayer.Size = new Size(multiplayer.Width + 8, multiplayer.Height + 8);
+            multiplayer.Refresh();
         }
 
 
@@ -125,7 +125,7 @@ namespace h2mLauncher
                 MainForm.sizeLeft.Visible = false;
                 MainForm.metroProgressBar1.Visible = false;
                 //	MainForm.pictureBox5.Visible = false;
-                MainForm.pictureBox1.Visible = false;
+                MainForm.multiplayer.Visible = false;
                 MainForm.statusLabel.Visible = false;
                 MainForm.listView1.Visible = false;
             });
@@ -150,6 +150,7 @@ namespace h2mLauncher
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
             refreshButton.Enabled = false; //Refresh button
+            listView1.ItemActivate -= new EventHandler(Serverbrowser.ListView1_ItemActivate);
             listView1.Items.Clear();
             Serverbrowser.initializeBrowser();
         }
