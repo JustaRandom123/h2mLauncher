@@ -149,6 +149,7 @@ namespace h2mLauncher
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
+            Serverbrowser.UpdateFavorites();
             refreshButton.Enabled = false; //Refresh button
             listView1.ItemActivate -= new EventHandler(Serverbrowser.ListView1_ItemActivate);
             listView1.Items.Clear();

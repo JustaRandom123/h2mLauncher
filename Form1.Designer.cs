@@ -173,7 +173,7 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "";
-            this.columnHeader5.Width = 25;
+            this.columnHeader5.Width = 50;
             // 
             // metroProgressSpinner1
             // 
