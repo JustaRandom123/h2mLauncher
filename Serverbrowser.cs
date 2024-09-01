@@ -36,8 +36,8 @@ namespace h2mLauncher
                         ListViewItem item = new ListViewItem(server["hostname"].ToString());
                         item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
                         item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
-                        item.SubItems.Add($"{server["map"].ToString()}");
-                        item.SubItems.Add($"{server["gametype"].ToString()}");
+                        item.SubItems.Add($"{Helper.validateMaps(server["map"].ToString())}");
+                        item.SubItems.Add($"{Helper.validateGamemode(server["gametype"].ToString())}");
                         item.SubItems.Add("");
                         Form1.MainForm.listView1.Items.Add(item);
 

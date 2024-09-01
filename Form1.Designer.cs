@@ -152,7 +152,7 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Servername";
+            this.columnHeader1.Text = "Hostname";
             this.columnHeader1.Width = 630;
             // 
             // columnHeader2
@@ -167,7 +167,7 @@
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Gametype";
+            this.columnHeader4.Text = "Mode";
             this.columnHeader4.Width = 150;
             // 
             // columnHeader5

@@ -1,0 +1,92 @@
+{
+  "gamemodes": [
+    {
+      "war": "War"
+    },
+    {
+      "dm": "Deathmatch"
+    },
+    {
+      "sd": "Search & Destroy"
+    },
+    {
+      "dom": "Domination"
+    },
+    {
+      "gun": "Gun game"
+    },
+    {
+      "infect": "Infection"
+    },
+    {
+      "hp": "Hardpoint"
+    },
+    {
+      "conf": "Kill Confirmed"
+    },
+	{
+      "koth": "King of the Hill"
+    },
+	{
+      "sab": "Sabotage"
+    },
+	{
+      "dd": "Unknown"
+    }
+  ],
+  "maps": [
+    {"mp_afghan": "Afghan"},
+	{"mp_subbase": "Sub Base"},
+	{"mp_invasion": "Invasion"},
+	{"mp_terminal": "Terminal"},
+	{"mp_rust": "Rust"},
+	{"mp_bloc": "Bloc"},
+	{"mp_boneyard": "Boneyard"},
+	{"mp_quarry": "Quarry"},
+	{"mp_favela": "Favela"},
+	{"mp_highrise": "Highrise"},
+	{"mp_farm_spring": "Farm Spring"},
+	{"mp_shipment": "Shipment"},
+	{"mp_rundown": "Rundown"},
+	{"mp_trailerpark": "Trailerpark"},
+	{"mp_estate": "Estate"},
+	{"mp_killhouse": "Killhouse"},
+	{"mp_crash": "Crash"},
+	{"mp_overgrown": "Overgrown"},
+	{"dc_whitehouse": "Whitehouse"},
+	{"mp_cargoship": "Cargoship"},
+	{"mp_complex": "Complex"},
+	{"mp_nightshift": "Nightshift"},
+	{"mp_fuel2": "Fuel"},
+	{"mp_convoy": "Convoy"},
+	{"mp_vacant": "Vacant"},
+	{"mp_checkpoint": "Afghan"},
+	{"mp_bog": "Bog"},
+	{"mp_crossfire": "Crossfire"},
+	{"mp_brecourt": "Brecourt"},
+	{"mp_greenband": "Greenband"},
+	{"mp_derail": "Derail"},
+	{"mp_underpass": "Underpass"},
+	{"mp_backlot": "Backlot"},
+	{"mp_showdown": "Showdown"},
+	{"mp_bog_summer": "Bog Summer"},
+	{"oilrig": "Oilrig"},
+	{"airport": "Airport"},
+	{"cliffhanger": "Cliff Hanger"},
+	{"mp_carentan": "Carentan"},
+	{"contingency": "Unknown"},
+	{"dcburning": "Unknown"},
+	{"mp_crash_snow": "Crash Snow"},
+	{"mp_prison": "Prison"},
+	{"mp_strike": "Strike"},
+	{"mp_instinct": "Instinct"},
+	{"mp_pipeline": "Pipeline"},
+	{"mp_storm": "Storm"},
+	{"mp_abandon": "Abandon"},
+	{"mp_broadcast": "Broadcast"},
+	{"mp_farm": "Farm"},
+	{"mp_compact": "Compact"},
+	{"mp_creek": "Creek"},
+	{"mp_citystreets": "Citry Streets"},
+  ]
+}
