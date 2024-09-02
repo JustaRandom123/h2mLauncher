@@ -153,17 +153,17 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Hostname";
-            this.columnHeader1.Width = 630;
+            this.columnHeader1.Width = 788;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Players";
-            this.columnHeader2.Width = 150;
+            this.columnHeader2.Width = 100;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Map";
-            this.columnHeader3.Width = 250;
+            this.columnHeader3.Width = 150;
             // 
             // columnHeader4
             // 
@@ -173,7 +173,7 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "";
-            this.columnHeader5.Width = 50;
+            this.columnHeader5.Width = 30;
             // 
             // metroProgressSpinner1
             // 

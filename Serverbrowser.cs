@@ -53,7 +53,7 @@ namespace h2mLauncher
                     }
                     else
                     {
-                        MessageBox.Show("Timeout occured during fetching the serverlist! Use the refresh button to try it again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Timeout occured during requesting the serverlist! Use the refresh button to try it again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (HttpRequestException ex)
@@ -89,36 +89,48 @@ namespace h2mLauncher
             Form1.MainForm.Refresh();
         }
 
-        //private static void ListView1_MouseClick(object? sender, MouseEventArgs e)
-        //{
-        //    var hitTest = Form1.MainForm.listView1.HitTest(e.Location);
-
-        //    // Überprüfen, ob auf den "Favorite"-Button geklickt wurde
-        //    if (hitTest.Item != null && hitTest.SubItem != null && hitTest.Item.SubItems.IndexOf(hitTest.SubItem) == 4)
-        //    {
-        //        // Favoritenstatus umschalten
-        //        var isFavorite = hitTest.Item.Tag as bool? == true;
-        //        hitTest.Item.Tag = !isFavorite;
-
-        //        // ListView neu zeichnen
-        //        Form1.MainForm.listView1.Invalidate(hitTest.SubItem.Bounds);
-        //    }
-        //}
+       
 
         private static void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
-            e.DrawDefault = true;
+            // e.DrawDefault = true;
+            using (var borderPen = new Pen(Color.White, 2)) // Border-Farbe und -Breite anpassen
+            {
+                // Rahmen um das gesamte Item zeichnen
+                Rectangle rect = e.Bounds;
+                rect.Width -= 1; // Rahmen anpassen
+                rect.Height -= 1; // Rahmen anpassen
+                e.Graphics.DrawRectangle(borderPen, rect);
+                e.Graphics.DrawString(e.Header.Text, e.Font, Brushes.White, rect);
+            }           
         }
 
         private static void ListView_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
-            // We don't draw the item here since we use DrawSubItem instead
+            // Hintergrund und Text zeichnen
+            e.DrawBackground();
+
+            // Zeichne die Border um das Item, wenn es ausgewählt ist
+            if (e.Item.Selected)
+            {
+                using (var borderPen = new Pen(Color.Green, 1)) // Border-Farbe und -Breite anpassen
+                {
+                    // Rahmen um das gesamte Item zeichnen
+                    Rectangle rect = e.Bounds;
+                    rect.Width -= 1; // Rahmen anpassen
+                    rect.Height -= 1; // Rahmen anpassen
+                    e.Graphics.DrawRectangle(borderPen, rect);
+                }
+            }
         }
 
         private static HashSet<string> favorites = LoadFavoritesFromJson("favorites.json"); // Favoriten einmal laden und speichern
 
         private static void ListView_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
+          //  e.DrawBackground();
+
+           // bool isSelected = e.Item.Selected;
             if (e.ColumnIndex == 0) // Custom draw only for the first column (hostname)
             {
                 // Prüfen, ob der Text Farbcodes enthält
@@ -129,8 +141,7 @@ namespace h2mLauncher
                 }
                 else
                 {
-                    // Zeichne den Text standardmäßig
-                    e.DrawDefault = true;
+                    e.Graphics.DrawString(e.SubItem.Text, e.Item.Font, Brushes.White, e.Bounds);
                 }
             }
             else if (e.ColumnIndex == 4) // "Favorite"-Button zeichnen
@@ -151,7 +162,8 @@ namespace h2mLauncher
             }
             else
             {
-                e.DrawDefault = true; // Default draw for other columns
+                e.Graphics.DrawString(e.SubItem.Text,e.Item.Font, Brushes.White, e.Bounds);
+                // e.DrawDefault = true; // Default draw for other columns
             }
         }
 
@@ -273,25 +285,5 @@ namespace h2mLauncher
         {
             favorites = LoadFavoritesFromJson("favorites.json");
         }
-
-
-        //public async static void ListView1_ItemActivate(object? sender, EventArgs e)
-        //{
-
-
-        //    if (Form1.MainForm.listView1.SelectedItems.Count == 1)
-        //    {
-        //       // var servername = Form1.MainForm.listView1.SelectedItems[0].ToString();
-        //        var selectedServer = Form1.MainForm.listView1.SelectedItems[0].Tag.ToString();
-        //        Clipboard.SetText($"connect {selectedServer}");
-        //        MessageBox.Show($"connect {selectedServer}\n\nLaunch the game open the console in main menu and paste the copied text to join the server!", "Server copied to clipboard!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //      //  return;
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Error selecting a server!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
-        //}
     }
 }

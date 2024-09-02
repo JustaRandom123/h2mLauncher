@@ -1,7 +1,7 @@
 {
   "gamemodes": [
     {
-      "war": "War"
+      "war": "Team Deathmatch"
     },
     {
       "dm": "Deathmatch"
@@ -25,7 +25,7 @@
       "conf": "Kill Confirmed"
     },
 	{
-      "koth": "King of the Hill"
+      "koth": "Headquarter"
     },
 	{
       "sab": "Sabotage"
