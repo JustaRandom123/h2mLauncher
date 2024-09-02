@@ -43,9 +43,11 @@
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.refreshButton = new System.Windows.Forms.PictureBox();
             this.playButton = new System.Windows.Forms.PictureBox();
+            this.settingsButton = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.multiplayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsButton)).BeginInit();
             this.SuspendLayout();
             // 
             // statusLabel
@@ -194,7 +196,7 @@
             this.refreshButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.refreshButton.Enabled = false;
             this.refreshButton.Image = global::h2mLauncher.Properties.Resources.Reset;
-            this.refreshButton.Location = new System.Drawing.Point(1139, 16);
+            this.refreshButton.Location = new System.Drawing.Point(1067, 16);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(30, 30);
             this.refreshButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -217,6 +219,20 @@
             this.playButton.Visible = false;
             this.playButton.Click += new System.EventHandler(this.pictureBox3_Click_1);
             // 
+            // settingsButton
+            // 
+            this.settingsButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.settingsButton.Enabled = false;
+            this.settingsButton.Image = global::h2mLauncher.Properties.Resources.settings;
+            this.settingsButton.Location = new System.Drawing.Point(1139, 16);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(30, 30);
+            this.settingsButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.settingsButton.TabIndex = 21;
+            this.settingsButton.TabStop = false;
+            this.settingsButton.Visible = false;
+            this.settingsButton.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // Form1
             // 
             this.ApplyImageInvert = true;
@@ -225,6 +241,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BackMaxSize = 1243;
             this.ClientSize = new System.Drawing.Size(1242, 699);
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.multiplayer);
             this.Controls.Add(this.playButton);
@@ -245,6 +262,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.multiplayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,5 +284,6 @@
 		public MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
 		public PictureBox refreshButton;
 		public PictureBox playButton;
-	}
+        public PictureBox settingsButton;
+    }
 }

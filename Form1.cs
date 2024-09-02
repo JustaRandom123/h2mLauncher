@@ -119,7 +119,8 @@ namespace h2mLauncher
             MainForm.Invoke((MethodInvoker)delegate
             {
                 //	MainForm.webView21.Visible = false;
-                MainForm.playButton.Visible = true; //Refresh button
+                MainForm.playButton.Visible = true; //Refresh
+             //   MainForm.settingsButton.Visible = true; //Refresh button
                 MainForm.refreshButton.Visible = true; //Refresh button
                 MainForm.BackImage = null;
                 MainForm.sizeLeft.Visible = false;
@@ -154,6 +155,17 @@ namespace h2mLauncher
             listView1.ItemActivate -= new EventHandler(Serverbrowser.ListView1_ItemActivate);
             listView1.Items.Clear();
             Serverbrowser.initializeBrowser();
+        }
+
+        public static void setControlState(bool state)
+        {           
+            Form1.MainForm.listView1.Enabled = state;             
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            SettingsTab.drawSettings();
+            setControlState(false);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace h2mLauncher
 {
     internal class Serverbrowser
     {
+
+        private static int hoveredItemIndex = -1;
         public static async void initializeBrowser()
         {
             int playercount = 0;
@@ -71,11 +73,14 @@ namespace h2mLauncher
      
             Form1.MainForm.refreshButton.Enabled = true; //Refresh button
             Form1.MainForm.playButton.Enabled = true; //play button
+           // Form1.MainForm.settingsButton.Enabled = true; //Refresh button
 
             Form1.MainForm.Text = $"Welcome {SteamHandler.username} | Total Players: {playercount} | Total Servers: {servercount}";
           //  Form1.MainForm.listView1.Activation = System.Windows.Forms.ItemActivation.Standard;
             Form1.MainForm.listView1.ItemActivate += ListView1_ItemActivate;
-           // Form1.MainForm.listView1.ItemCheck += ListView1_ItemCheck;
+            // Form1.MainForm.listView1.ItemCheck += ListView1_ItemCheck;
+            Form1.MainForm.listView1.MouseMove += ListView1_MouseMove;
+            Form1.MainForm.listView1.MouseLeave += ListView_MouseLeave;
             Form1.MainForm.listView1.DrawItem += ListView_DrawItem;
             Form1.MainForm.listView1.DrawSubItem += ListView_DrawSubItem;
             Form1.MainForm.listView1.DrawColumnHeader += ListView_DrawColumnHeader;
@@ -89,7 +94,34 @@ namespace h2mLauncher
             Form1.MainForm.Refresh();
         }
 
-       
+        private static void ListView1_MouseMove(object? sender, MouseEventArgs e)
+        {
+            ListViewItem item = Form1.MainForm.listView1.GetItemAt(e.X, e.Y);
+            if (item != null)
+            {
+                int index = item.Index;
+
+                // Nur neu zeichnen, wenn sich der Index ändert
+                if (hoveredItemIndex != index)
+                {
+                    hoveredItemIndex = index;                
+                }
+            }
+            else
+            {
+                // Kein Item wird gehovered
+                if (hoveredItemIndex != -1)
+                {
+                    hoveredItemIndex = -1;               
+                }
+            }
+        }
+
+        private static void ListView_MouseLeave(object sender, EventArgs e)
+        {
+            // Wenn die Maus die ListView verlässt, den gehoverten Index zurücksetzen
+            hoveredItemIndex = -1;        
+        }
 
         private static void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
@@ -110,6 +142,20 @@ namespace h2mLauncher
             // Hintergrund und Text zeichnen
             e.DrawBackground();
 
+
+            if (e.ItemIndex == hoveredItemIndex)
+            {
+                using (var borderPen = new Pen(Color.Green, 1))
+                {
+                    // Rahmen um das gesamte Item zeichnen
+                    Rectangle rect = e.Bounds;
+                    rect.Width -= 1; // Rahmen anpassen
+                    rect.Height -= 1; // Rahmen anpassen
+                    e.Graphics.DrawRectangle(borderPen, rect);
+                }
+            }
+
+
             // Zeichne die Border um das Item, wenn es ausgewählt ist
             if (e.Item.Selected)
             {
@@ -122,6 +168,8 @@ namespace h2mLauncher
                     e.Graphics.DrawRectangle(borderPen, rect);
                 }
             }
+
+            
         }
 
         private static HashSet<string> favorites = LoadFavoritesFromJson("favorites.json"); // Favoriten einmal laden und speichern
