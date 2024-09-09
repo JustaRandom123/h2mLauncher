@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Security.Policy;
 using System.Text;
 using System.Text.Json;
@@ -31,17 +32,27 @@ namespace h2mLauncher
                     string json = await client.GetStringAsync("https://master.iw4.zip/instance/");
                     JArray jsonArray = JArray.Parse(json);
                     var filteredServers = jsonArray.SelectMany(obj => obj["servers"]
-                                                .Where(server => server["game"]?.ToString().ToUpper() == "H2M"));
+                                                .Where(server => server["game"]?.ToString().ToUpper() == "H2M"))
+                                                .OrderByDescending(server => Convert.ToInt32(server["clientnum"].ToString()));
 
                     foreach (var server in filteredServers)
                     {
+                        string ip = server["ip"].ToString();
+                      //  int ping = await GetPingAsync(ip); // Asynchrone Ping-Methode aufrufen
+
                         ListViewItem item = new ListViewItem(server["hostname"].ToString());
                         item.Tag = $"{server["ip"].ToString()}:{server["port"].ToString()}";
                         item.SubItems.Add($"{server["clientnum"].ToString()} / {server["maxclientnum"].ToString()}");
                         item.SubItems.Add($"{Helper.validateMaps(server["map"].ToString())}");
                         item.SubItems.Add($"{Helper.validateGamemode(server["gametype"].ToString())}");
                         item.SubItems.Add("");
+                        //   item.SubItems.Add(ping != -1 ? $"{ping} ms" : "Offline"); // Zeige den Ping oder "N/A" bei Fehler an
+                        item.SubItems.Add("..."); // Platzhaltertext für den Ping
+                                                         //  item.SubItems.Add("");
                         Form1.MainForm.listView1.Items.Add(item);
+
+
+                        _ = UpdatePingAsync(item, ip);
 
                         servercount = servercount + 1;
                         playercount = playercount + Convert.ToInt32(server["clientnum"].ToString());
@@ -93,6 +104,37 @@ namespace h2mLauncher
             Form1.MainForm.listView1.Visible = true;
             Form1.MainForm.Refresh();
         }
+
+
+        private static async Task UpdatePingAsync(ListViewItem item, string ip)
+        {
+            int ping = await GetPingAsync(ip); // Ping den Server                                            
+            item.SubItems[5].Text = ping != -1 ? $"{ping}" : "N/A";
+          
+        }
+
+        // Methode zum Pingen eines Servers
+        private static async Task<int> GetPingAsync(string ip)
+        {
+            try
+            {
+                using (Ping ping = new Ping())
+                {
+                    PingReply reply = await ping.SendPingAsync(ip, 500); // Timeout von 1000 ms (1 Sekunde)
+                    if (reply.Status == IPStatus.Success)
+                    {
+                      // MessageBox.Show("Ping: " + (int)reply.RoundtripTime);
+                        return (int)reply.RoundtripTime; // Gibt die Ping-Zeit in Millisekunden zurück
+                    }
+                }
+            }
+            catch
+            {
+                // Fehler beim Pingen, Rückgabe von -1 oder einem anderen speziellen Wert, der Fehler anzeigt
+            }
+            return -1; // -1 zeigt an, dass der Ping fehlgeschlagen ist
+        }
+
 
         private static void ListView1_MouseMove(object? sender, MouseEventArgs e)
         {
@@ -176,9 +218,9 @@ namespace h2mLauncher
 
         private static void ListView_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
-          //  e.DrawBackground();
+            //  e.DrawBackground();
 
-           // bool isSelected = e.Item.Selected;
+            // bool isSelected = e.Item.Selected;
             if (e.ColumnIndex == 0) // Custom draw only for the first column (hostname)
             {
                 // Prüfen, ob der Text Farbcodes enthält
@@ -208,9 +250,21 @@ namespace h2mLauncher
                 // Zeichne einen Sternsymbol als "Favorite"-Button
                 e.Graphics.DrawString("★", new Font("Arial", 16), starColor, buttonRect);
             }
+            else if (e.ColumnIndex == 5) // "Favorite"-Button zeichnen
+            {
+                if (Convert.ToInt32(e.SubItem.Text) > 100)
+                {
+                    e.Graphics.DrawString(e.SubItem.Text, e.Item.Font, Brushes.Red, e.Bounds);
+                }
+                else
+                {
+                    e.Graphics.DrawString(e.SubItem.Text, e.Item.Font, Brushes.Green, e.Bounds);
+                }
+                
+            }
             else
             {
-                e.Graphics.DrawString(e.SubItem.Text,e.Item.Font, Brushes.White, e.Bounds);
+                e.Graphics.DrawString(e.SubItem.Text, e.Item.Font, Brushes.White, e.Bounds);
                 // e.DrawDefault = true; // Default draw for other columns
             }
         }

@@ -40,6 +40,7 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.refreshButton = new System.Windows.Forms.PictureBox();
             this.playButton = new System.Windows.Forms.PictureBox();
@@ -137,7 +138,8 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.columnHeader6});
             this.listView1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.listView1.ForeColor = System.Drawing.Color.White;
             this.listView1.FullRowSelect = true;
@@ -146,7 +148,7 @@
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.OwnerDraw = true;
-            this.listView1.Size = new System.Drawing.Size(1238, 646);
+            this.listView1.Size = new System.Drawing.Size(1252, 646);
             this.listView1.TabIndex = 16;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -155,7 +157,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Hostname";
-            this.columnHeader1.Width = 788;
+            this.columnHeader1.Width = 755;
             // 
             // columnHeader2
             // 
@@ -176,6 +178,10 @@
             // 
             this.columnHeader5.Text = "";
             this.columnHeader5.Width = 30;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Ping";
             // 
             // metroProgressSpinner1
             // 
@@ -240,7 +246,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BackMaxSize = 1243;
-            this.ClientSize = new System.Drawing.Size(1242, 699);
+            this.ClientSize = new System.Drawing.Size(1257, 699);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.multiplayer);
@@ -285,5 +291,6 @@
 		public PictureBox refreshButton;
 		public PictureBox playButton;
         public PictureBox settingsButton;
+        private ColumnHeader columnHeader6;
     }
 }
