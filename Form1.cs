@@ -22,7 +22,7 @@ namespace h2mLauncher
 
             this.ApplyImageInvert = false;
 			this.BackImage = h2mLauncher.Properties.Resources.backHD;
-			this.BackMaxSize = 1243;
+			this.BackMaxSize = 1257;
 
 
 

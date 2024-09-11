@@ -25,7 +25,7 @@ namespace h2mLauncher.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.0.0.8")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.0.0.9")]
         public string version {
             get {
                 return ((string)(this["version"]));
